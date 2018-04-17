@@ -10,7 +10,7 @@ export default class log extends React.Component{
 
     click(){
         console.log(this.state.user_id);
-        this.props.history.push('/home/'+this.state.user_id)
+        this.props.history.push('/student/'+this.state.user_id)
     }
 
     handleInput(event){
