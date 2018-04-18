@@ -1,0 +1,30 @@
+{
+    "user" :[
+      {
+        "user_id":15021156,
+        "position":0,
+        "class_id":"K60-CLC"
+      } ,
+      {
+        "user_id":15021111,
+        "position":0,
+        "class_id":"K60-CLC"
+  
+      },
+      {
+        "user_id":15021123,
+        "position":1,
+        "class_id":"K60-CLC"
+      } ,
+      {
+        "user_id":15021176,
+        "position":0,
+        "class_id":"K60-CLC"
+      } ,
+      {
+        "user_id":15021886,
+        "position":0,
+        "class_id":"K60-CLC"
+      }
+    ]
+  }

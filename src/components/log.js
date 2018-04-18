@@ -1,6 +1,7 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
-export default class log extends React.Component{
+class Log extends React.Component{
     constructor(){
         super();
         this.state = {
@@ -8,8 +9,8 @@ export default class log extends React.Component{
         }
     }
 
-    click(){
-        console.log(this.state.user_id);
+    click(event){
+        //console.log(event);
         this.props.history.push('/student/'+this.state.user_id)
     }
 
@@ -20,14 +21,15 @@ export default class log extends React.Component{
     }
     
     render(){
+        console.log(this.props)
         return(
             <div>
                 <div>this is Login</div>
                 <input type='text' placeholder="john snow" onChange={(event)=>this.handleInput(event)} />
-                <button onClick={()=>this.click()}>Login</button>
+                <button onClick={(event)=>this.click(event)}>Login</button>
             </div>
         );
     }
 }
 
-//export default log;
+export default withRouter(Log);

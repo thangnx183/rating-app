@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class respone extends React.Component{
+export default class Respone extends React.Component{
 
     render(){
         return(

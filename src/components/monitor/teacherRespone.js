@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class teacherRespone extends React.Component{
+export default class TeacherRespone extends React.Component{
 
     render(){
         return(
