@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import Log from './components/log';
+import Signup from './components/signup';
 import Rating from './components/student/rating';
 import Respone from './components/student/respone';
 import Request from './components/monitor/request';
@@ -17,7 +18,7 @@ class App extends React.Component {
       super();
       this.state = {
         id : null,
-        position: 1,
+        position: null,
       }
     }
 
@@ -38,14 +39,16 @@ class App extends React.Component {
                         {(this.state.position === 1) ? <Link to={'/monitor/'+this.state.id+'/respone'}>Get respone</Link>: null}
                         {this.state.id ? <Link to={'/'} >Sign out</Link> : null}
                         {!this.state.id ? <Link to={'/'} >Sign in</Link> : null}
+                        <Link to={'/signup'}> Signup </Link>
                     </ul>
 
-                    <Route exact path = {'/'} render={()=><Log history={history}/>}/>
-                    <Route exact path = {'/login'} render={()=><Log history={history} />} />
-                    <Route exact path ={'/student/:id'} render={()=><Rating/>}/>
-                    <Route exact path ={'/student/:id/respone'} render={()=><Respone/>} />
-                    <Route exact path = {'/monitor/:id'} render={()=><Request/>}  />
-                    <Route exact path = {'/monitor/:id/respone'} render={()=><TeacherRespone/>} />
+                    <Route exact path={'/'} render={()=><Log history={history}/>}/>
+                    <Route exact path={'/login'} render={()=> <Log history={history} />} />
+                    <Route path={'/signup'} render={()=><Signup history={history}/>} />
+                    <Route exact path ={'/student/:id'} render={()=> <Rating history={history} />} />
+                    <Route exact path ={'/student/:id/respone'} render={()=><Respone history={history}/>} />
+                    <Route exact path = {'/monitor/:id'} render={()=><Request history={history}/>}  />
+                    <Route exact path = {'/monitor/:id/respone'} render={()=><TeacherRespone history={history}/>} />
 
                 </div>
             </Router>

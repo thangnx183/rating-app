@@ -6,6 +6,8 @@ class Log extends React.Component{
         super();
         this.state = {
             user_id: null,
+            password: null,
+            erorr:null,
         }
     }
 
@@ -14,19 +16,28 @@ class Log extends React.Component{
         this.props.history.push('/student/'+this.state.user_id)
     }
 
-    handleInput(event){
+    handleUser(event){
         this.setState({
             user_id: event.target.value,
         })
     }
+
+    handlePass(event){
+        this.setState({
+            password: event.target.value,
+        })
+    }
     
     render(){
-        console.log(this.props)
+       //console.log(this.props)
         return(
             <div>
-                <div>this is Login</div>
-                <input type='text' placeholder="john snow" onChange={(event)=>this.handleInput(event)} />
-                <button onClick={(event)=>this.click(event)}>Login</button>
+                <div>Login</div>
+                <form>
+                    <input type='text' placeholder="enter your id" onChange={(event)=>this.handleUser(event)} /> <br/>
+                    <input type='password' placeholder='enter your password' onChange={(event)=>this.handlePass(event)}/> <br/>
+                    <button onClick={(event)=>this.click(event)}>Login</button>
+                </form>
             </div>
         );
     }
