@@ -90,7 +90,7 @@ class Request extends React.Component{
         fetch(url)
         .then(respone=>respone.json())
         .then(respone=>{
-            console.log(respone.status)
+            console.log(respone)
             this.setState({
                 currentStudent: respone.data
             })

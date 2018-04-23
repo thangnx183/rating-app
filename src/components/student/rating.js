@@ -5,6 +5,7 @@ export default class Rating extends React.Component{
     constructor(){
         super();
         this.state = {
+            rateStatus: "not send yet",
             category1: null,
             category2: null,
             category3: null
@@ -44,10 +45,19 @@ export default class Rating extends React.Component{
             headers: {
                 "content-type":"application/json",
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                category1: this.state.category1,
+                category2: this.state.category2,
+                category3: this.state.category3
+            })
         })
         .then(respone=>{
             console.log(respone)
+            if(respone.status == 200){
+                this.setState({
+                    rateStatus: "sent"
+                }) 
+            }
         })
 
     }
@@ -62,6 +72,8 @@ export default class Rating extends React.Component{
                     tham gia cac hoat dong van nghe <input id='3' type='number'/> <br/>
                     <button onClick={(event)=>this.onClickButton(event)}>submit </button>
                 </form>
+
+                <p>{this.state.rateStatus} </p>
             </div>
         )
     }

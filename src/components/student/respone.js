@@ -11,14 +11,14 @@ export default class Respone extends React.Component{
     
    componentWillMount(){
         //http://35.185.179.159:8080/api/monitor/feedback?studentID=1bb23883-b0af-4459-9011-3f83983a3758
-        let url = "http://35.185.179.159:8080/api/monitor/feedback?studentID="+this.props.match.params.id;
+        //
+        //http://35.185.179.159:8080/api/adviser/feedback/111
+
+        let url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
         fetch(url)
         .then((respone)=>{
-            return respone.json();
-        })
-        .then((respone)=>{
             console.log(respone)
-            this.setState({
+           /* this.setState({
                 status: respone.state
             })
 
@@ -26,7 +26,7 @@ export default class Respone extends React.Component{
                 this.setState({
                     status: "waiting",
                 })
-            }
+            }*/
         })
    }
 

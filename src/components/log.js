@@ -60,9 +60,9 @@ class Log extends React.Component{
     
     render(){
        //console.log(this.state.erorr)
-        return(
+        /*return(
             <div>
-                <div>Login</div>
+                <div>Sign in</div>
                 <form>
                     <input type='text' placeholder="enter your id" onChange={(event)=>this.handleUser(event)} /> <br/>
                     <input type='password' placeholder='enter your password' onChange={(event)=>this.handlePass(event)}/> <br/>
@@ -70,6 +70,17 @@ class Log extends React.Component{
                 </form>
 
                 <p>{this.state.error}</p>
+            </div>
+        );*/
+
+        return(
+            <div >
+            <form className="form-signin">
+                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <input type="email" id="inputEmail"  placeholder="Your id"  autofocus="" onChange={(event)=>this.handleUser(event)} /> <br/>
+                <input type="password" id="inputPassword" placeholder="Password" onChange={(event)=>this.handlePass(event)}/> <br/>
+                <button class="btn btn-primary" onClick={(event)=>this.click(event)} >Sign in</button>
+            </form>
             </div>
         );
     }
