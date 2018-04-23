@@ -5,10 +5,10 @@ class Signup extends React.Component{
     constructor(){
         super();
         this.state = {
+            user_name:null,
             user_id: null,
             password: null,
-            class_id: null,
-            position: null,
+            role: null,
             erorr:null,
         }
     }
@@ -18,7 +18,44 @@ class Signup extends React.Component{
         // send ajax request to server here 
         // if success go to login page
         // if not show an error
-        this.props.history.push('/')
+        //this.props.history.push('/')
+        event.preventDefault();
+
+        const url = "http://35.185.179.159:8080/api/auth/register";
+        var data = {
+            "fullName": this.state.user_name,
+            "username": this.state.user_id,
+            "password": this.state.password,
+            "role": this.state.role            
+        }
+
+        console.log(JSON.stringify(data));
+
+        fetch(url,{
+            method: "POST",
+            body: JSON.stringify(data),
+            headers:{
+                'content-type': 'application/json'
+            }
+        }).catch(error => console.error('Error:', error))
+        .then(respone=>{
+            if(respone.status === 403){
+                this.setState({
+                    erorr:"Account exist"
+                })
+            }
+
+            if(respone.status === 200){
+                this.props.history.push('/login')
+                //console.log(respone.)
+            }
+        })
+    }
+
+    handleName(event){
+        this,this.setState({
+            user_name : event.target.value,
+        })
     }
 
     handleUser(event){
@@ -39,9 +76,9 @@ class Signup extends React.Component{
         })
     }
 
-    handlePos(event){
+    handleRole(event){
         this.setState({
-            position: event.target.value,
+            role: event.target.value,
         })
     }
 
@@ -52,12 +89,14 @@ class Signup extends React.Component{
             <div>
                 <div>Sign up</div>
                 <form>
+                    <input type='text' placeholder='enter yout full name' onChange={(event)=>this.handleName(event)}/> <br/>
                     <input type='text' placeholder="enter your id" onChange={(event)=>this.handleUser(event)} /> <br/>
                     <input type='password' placeholder='enter your password' onChange={(event)=>this.handlePass(event)}/>  <br/>
-                    <input type='text' placeholder='enter your class' onChange={(event)=>this.handleClass(event)}/>  <br/>
-                    <input type='text' placeholder='enter your position' onChange={(event)=>this.handlePos(event)}/>  <br/>
+                    <input type='text' placeholder='enter your role' onChange={(event)=>this.handleRole(event)}/>  <br/>
                     <button onClick={(event)=>this.click(event)}>Sign up</button>
                 </form>
+
+                <p>{this.state.erorr}</p>
             </div>
         );
     }

@@ -12,13 +12,15 @@ import Request from './components/monitor/request';
 import TeacherRespone from './components/monitor/teacherRespone'; 
 
 const history = createBrowserHistory();
+  
 
 class App extends React.Component {
     constructor(){
       super();
       this.state = {
-        id : null,
-        position: null,
+        userId : null,
+        userName: null,
+        role: null,
       }
     }
 
@@ -26,30 +28,57 @@ class App extends React.Component {
         console.log("clicked");
     }
 
+    updateSate(id,name,role){
+       /* this.setState({
+            userId:id,
+            role: role
+        })*/
+        console.log(id+" : " +role)
+
+        this.setState({
+            userId: id,
+            userName: name,
+            role: role
+        })
+    }
+
+    signOut(){
+        this.setState({
+            userId: null,
+            userName: null,
+            role: null
+        })
+
+        return (
+            <Link to={'/'}>Signout</Link>
+        )
+    }
+
     render() {
+        console.log("index: ")
+        console.log(this.state.userId)
 
       return (
         <div> 
             <Router >
                 <div>
                     <ul>
-                        {(this.state.position === 0 || this.state.position === 1) ? <Link to={'/student/'+this.state.id}>Rating</Link>: null}
-                        {(this.state.position === 0 || this.state.position === 1) ? <Link to={'/student/'+this.state.id+'/respone'}>Get Respone</Link>: null}
-                        {(this.state.position === 1) ? <Link to={'/monitor/'+this.state.id}>Take request</Link>: null}
-                        {(this.state.position === 1) ? <Link to={'/monitor/'+this.state.id+'/respone'}>Get respone</Link>: null}
-                        {this.state.id ? <Link to={'/'} >Sign out</Link> : null}
-                        {!this.state.id ? <Link to={'/'} >Sign in</Link> : null}
-                        <Link to={'/signup'}> Signup </Link>
+                        {(this.state.role === "student" || this.state.role === "monitor") ? <Link to={'/student/'+this.state.userName+'/'+this.state.userId+'/rate'}>Rating</Link>: null}
+                        {(this.state.role === "student" || this.state.role === "monitor") ? <Link to={'/student/'+this.state.userName+'/'+this.state.userId+'/respone'}>Get Respone</Link>: null}
+                        {(this.state.role === "monitor") ? <Link to={'/monitor/'+this.state.userName+'/'+this.state.userId+'/request'}>Take request</Link>: null}
+                        {(this.state.role === "monitor") ? <Link to={'/monitor/'+this.state.userName+'/'+this.state.userId+'/respone'}>Get respone</Link>: null}
+                        {! (this.state.userId === null) ? <Link to={'/'}>Signout</Link> : null}
+                        {(this.state.userId === null) ? <Link to={'/'} >Sign in</Link> : null}
+                        { (this.state.userId === null) ? <Link to={'/signup'}> Signup </Link>: null}
                     </ul>
 
-                    <Route exact path={'/'} render={()=><Log history={history}/>}/>
-                    <Route exact path={'/login'} render={()=> <Log history={history} />} />
-                    <Route path={'/signup'} render={()=><Signup history={history}/>} />
-                    <Route exact path ={'/student/:id'} render={()=> <Rating history={history} />} />
-                    <Route exact path ={'/student/:id/respone'} render={()=><Respone history={history}/>} />
-                    <Route exact path = {'/monitor/:id'} render={()=><Request history={history}/>}  />
-                    <Route exact path = {'/monitor/:id/respone'} render={()=><TeacherRespone history={history}/>} />
-
+                    <Route exact path={'/'}  component={()=><Log update={(id,name, role)=>this.updateSate(id,name, role)}/>}/>
+                    <Route path={'/login'} component={()=><Log update={(id,name, role)=>this.updateSate(id,name, role)}/>}  />
+                    <Route path={'/signup'} component={Signup} />
+                    <Route path ={'/student/:name/:id/rate'} component={Rating} />
+                    <Route path ={'/student/:name/:id/respone'} component={Respone} />
+                    <Route path = {'/monitor/:name/:id/request'} component={Request}  />
+                    <Route path = {'/monitor/:name/:id/respone'} component={TeacherRespone} />
                 </div>
             </Router>
         </div>
