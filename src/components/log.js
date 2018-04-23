@@ -18,30 +18,35 @@ class Log extends React.Component{
         event.preventDefault();
         //this.props.history.push('/student/'+this.state.user_id)
         //http://35.185.179.159:8080/api/auth/login?username=15021128&password=fdfddf
-        let url = "http://35.185.179.159:8080/api/auth/login?username=" + this.state.userName + "&password="+this.state.password;
+        let url = "http://35.185.179.159:8080/api/auth/login?username=" 
+                + this.state.userName + "&password="+this.state.password;
 
         fetch(url,{
             method:"POST",
             headers:{
                 'content-type': 'application/json'
             }
-        }).then(respone=>{return respone.json()})
+        }).then(respone=>{
+          if(!respone.ok){
+              throw respone;
+          }
+
+          return respone.json();
+        })
         .then(respone=>{
-            console.log(respone);
-            if(respone.status === 403){
+            this.props.update(respone.userID, this.state.userName,respone.role);
+            this.props.history.push('/student/'+this.state.userName+'/'+respone.userID+'/rate');
+        })
+        .catch(err=>{
+            //console.log(err)
+            if(err.status == 403){
                 this.setState({
                     error:"wrong password"
                 })
-
-                //console.log("wrong paa");
-            }else if(respone.status === 404){
+            }else if(err.status == 404){
                 this.setState({
                     error:"Account not registered"
                 })
-            }else{
-                console.log("respone : "+respone);
-                this.props.update(respone.userID, this.state.userName,respone.role);
-                this.props.history.push('/student/'+this.state.userName+'/'+respone.userID+'/rate');
             }
         })
     }
@@ -59,28 +64,17 @@ class Log extends React.Component{
     }
     
     render(){
-       //console.log(this.state.erorr)
-        /*return(
-            <div>
-                <div>Sign in</div>
-                <form>
-                    <input type='text' placeholder="enter your id" onChange={(event)=>this.handleUser(event)} /> <br/>
-                    <input type='password' placeholder='enter your password' onChange={(event)=>this.handlePass(event)}/> <br/>
-                    <button onClick={(event)=>this.click(event)}>Login</button>
-                </form>
-
-                <p>{this.state.error}</p>
-            </div>
-        );*/
-
+       
         return(
             <div >
             <form className="form-signin">
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <input type="email" id="inputEmail"  placeholder="Your id"  autofocus="" onChange={(event)=>this.handleUser(event)} /> <br/>
+                <input type="email" id="inputEmail"  placeholder="Your id"  autoFocus="" onChange={(event)=>this.handleUser(event)} /> <br/>
                 <input type="password" id="inputPassword" placeholder="Password" onChange={(event)=>this.handlePass(event)}/> <br/>
-                <button class="btn btn-primary" onClick={(event)=>this.click(event)} >Sign in</button>
-            </form>
+                <button className="btn btn-primary" onClick={(event)=>this.click(event)} >Sign in</button>
+            </form> <br/>
+
+            <p>{this.state.error}</p>
             </div>
         );
     }

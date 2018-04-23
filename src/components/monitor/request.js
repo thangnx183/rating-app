@@ -7,11 +7,10 @@ class Request extends React.Component{
 
     constructor(){
         super()
-        //console.log("request construtor")
+
         this.state={
             student:[],
             currentStudent: null,
-            //detail: false,
         }
     }
 
@@ -24,7 +23,7 @@ class Request extends React.Component{
         fetch(url)
         .then(respone=>respone.json())
         .then(respone=>{
-           // console.log(respone)
+
             this.setState({
                 student:respone
             })
@@ -34,13 +33,13 @@ class Request extends React.Component{
 
     handleAccepted(event){
         event.preventDefault();
-       // console.log(event.target.parentNode.id);
+
         let studentID = event.target.parentNode.id;
         let monitorID = this.props.match.params.id;
 
         //http://35.185.179.159:8080/api/monitor/trainingPointForm/12121/state/accepted?monitorID=0003
         let url = "http://35.185.179.159:8080/api/monitor/trainingPointForm/"
-                 + studentID + "/state/accepted?monitorID="+monitorID;
+                 + studentID + "/state/accepted?monitorID=" + monitorID;
 
         fetch(url)
         .then(respone=>{
@@ -55,7 +54,7 @@ class Request extends React.Component{
 
     handleRejected(event){
         event.preventDefault();
-        //console.log(event.target.parentNode.id);
+
         let studentID = event.target.parentNode.id;
         let monitorID = this.props.match.params.id;
 
@@ -75,46 +74,44 @@ class Request extends React.Component{
     }
 
     handleDetail(event){
-        //'/monitor/'+this.props.match.params.name+'/'+this.props.match.params.id+'/request/'
-        //event.preventDefault();
-       // console.log("yooooooooooooo")
-       // console.log(event.target.parentNode.id);
-        //console.log()
-        //this.props.history.push('/monitor/'+this.props.match.params.name+'/'+this.props.match.params.id+'/request/'+event.target.parentNode.id)
-       // this.setState({
-        //    currentStudent:event.target.parentNode.id
-        //})
-
         let url = "http://35.185.179.159:8080/api/trainingPointForm/" + event.target.parentNode.id;
 
         fetch(url)
-        .then(respone=>respone.json())
         .then(respone=>{
-            console.log(respone)
+            if(!respone.ok){
+                throw respone;
+            }
+
+            return respone.json();
+        })
+        .then(respone=>{
             this.setState({
                 currentStudent: respone.data
             })
+        })
+        .catch(err=>{
+            console.log(err)
         })
     }
 
     render(){
         //console.log(this.state)
         return(
-            <div>
-                <div >
+            <div className="row">
+                <div className="col-md-3">
                     {this.state.student.map(student=>{
                         //console.log("yooo");
                         return <div id={student.studentID} >
                                     <div>{student.studentName}</div> 
-                                    <button onClick={(event)=>this.handleAccepted(event)}>Accepted</button> 
-                                    <button onClick={(event)=>this.handleRejected(event)}> Rejected</button>
-                                    <button onClick={(event)=>this.handleDetail(event)}>Detail </button>
+                                    <button className="btn btn-primary" onClick={(event)=>this.handleAccepted(event)}>Accepted</button> 
+                                    <button className="btn btn-primary" onClick={(event)=>this.handleRejected(event)}> Rejected</button>
+                                    <button className="btn btn-primary" onClick={(event)=>this.handleDetail(event)}>Detail </button>
                                 </div>
                     })}
                 </div>
-
-                <RequestDetail student={this.state.currentStudent} handleAccepted={this.handleAccepted} handleRejected={this.handleRejected}/>
-
+                <div className="col-md-3">
+                    <RequestDetail student={this.state.currentStudent} handleAccepted={this.handleAccepted} handleRejected={this.handleRejected}/>
+                </div>
             </div>    
            
         )

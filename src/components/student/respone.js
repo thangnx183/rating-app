@@ -16,7 +16,16 @@ export default class Respone extends React.Component{
 
         let url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
         fetch(url)
+        .then(respone=>{
+            if(!respone.ok){
+                console.log(respone)
+                throw respone;
+            }
+
+            return respone.json();
+        })
         .then((respone)=>{
+            console.log("monitor respone")
             console.log(respone)
            /* this.setState({
                 status: respone.state
@@ -27,6 +36,9 @@ export default class Respone extends React.Component{
                     status: "waiting",
                 })
             }*/
+        })
+        .catch(err=>{
+            console.log(err.status)
         })
    }
 

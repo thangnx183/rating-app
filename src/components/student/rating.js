@@ -5,7 +5,7 @@ export default class Rating extends React.Component{
     constructor(){
         super();
         this.state = {
-            rateStatus: "not send yet",
+            rateStatus: null,
             category1: null,
             category2: null,
             category3: null
@@ -13,9 +13,8 @@ export default class Rating extends React.Component{
     }
 
     onChangeForm(event){
-        //console.log(event.target.id)
+
         if(event.target.id == 1){
-            //console.log("111")
             this.setState({
                 category1: event.target.value,
             })
@@ -37,8 +36,10 @@ export default class Rating extends React.Component{
     onClickButton(event){
         //http://35.185.179.159:8080/api/student/trainingPoint?userID=6f0fd751-8cec-4bd5-9926-0eb26d0d7b2e
         event.preventDefault();
+
+        let studentID = this.props.match.params.id;
         let url = "http://35.185.179.159:8080/api/student/trainingPoint?userID=";
-        url += this.props.match.params.id;
+        url += studentID;
         
         fetch(url,{
             method: "POST",
@@ -52,7 +53,7 @@ export default class Rating extends React.Component{
             })
         })
         .then(respone=>{
-            console.log(respone)
+
             if(respone.status == 200){
                 this.setState({
                     rateStatus: "sent"
@@ -63,7 +64,7 @@ export default class Rating extends React.Component{
     }
 
     render(){
-        //console.log(this.state);
+
         return(
             <div>
                 <form onChange={(event)=>this.onChangeForm(event)}>
