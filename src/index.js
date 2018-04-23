@@ -55,8 +55,8 @@ class App extends React.Component {
     }
 
     render() {
-        console.log("index: ")
-        console.log(this.state.userId)
+       // console.log("index: ")
+        //console.log(this.state.userId)
 
       return (
         <div> 

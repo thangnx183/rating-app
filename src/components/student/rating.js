@@ -5,9 +5,9 @@ export default class Rating extends React.Component{
     constructor(){
         super();
         this.state = {
-            "y thuc hoc tap": null,
-            "noi quy": null,
-            "van nghe": null
+            category1: null,
+            category2: null,
+            category3: null
         }
     }
 
@@ -16,19 +16,19 @@ export default class Rating extends React.Component{
         if(event.target.id == 1){
             //console.log("111")
             this.setState({
-                "y thuc hoc tap": event.target.value,
+                category1: event.target.value,
             })
         }
 
         if(event.target.id == 2){
             this.setState({
-                "noi quy": event.target.value,
+                category2: event.target.value,
             })
         }
 
         if(event.target.id == 3){
             this.setState({
-                "van nghe": event.target.value,
+                category3: event.target.value,
             })
         }
     }
@@ -53,7 +53,7 @@ export default class Rating extends React.Component{
     }
 
     render(){
-        console.log(this.state);
+        //console.log(this.state);
         return(
             <div>
                 <form onChange={(event)=>this.onChangeForm(event)}>

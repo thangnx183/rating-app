@@ -25,15 +25,15 @@ class Log extends React.Component{
             headers:{
                 'content-type': 'application/json'
             }
-        }).then((respone)=>{ return respone.json()})
+        }).then(respone=>{return respone.json()})
         .then(respone=>{
-            //console.log(respone);
+            console.log(respone);
             if(respone.status === 403){
                 this.setState({
                     error:"wrong password"
                 })
 
-                console.log("wrong paa");
+                //console.log("wrong paa");
             }else if(respone.status === 404){
                 this.setState({
                     error:"Account not registered"
