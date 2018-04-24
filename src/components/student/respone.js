@@ -28,7 +28,7 @@ export default class Respone extends React.Component{
             console.log(respone)
             if(respone != null){
                 this.setState({
-                    status: "waiting"
+                    status: "pending"
                 })
             }else{
                 this.setState({
@@ -39,8 +39,29 @@ export default class Respone extends React.Component{
         .catch(err=>{
             console.log(err);
         })
+        
+       this.getStatus();
+   }
 
-        url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
+   shouldComponentUpdate(nextprops, nextstate){
+        if(this.state.status == "pending"){
+            this.getStatus();
+            return true;
+        }
+
+        return false;
+   }
+
+   getStatus(){
+        /*
+        new api http://35.185.179.159:8080/api/monitor/feedback?studentID=12131
+        
+        if respone null : pending
+        else stauts =  respone.status
+        
+        */
+        //url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
+        let url = "http://35.185.179.159:8080/api/monitor/feedback?studentID="+ this.props.match.params.id;
         fetch(url)
         .then(respone=>{
             if(!respone.ok){
@@ -51,17 +72,15 @@ export default class Respone extends React.Component{
             return respone.json();
         })
         .then((respone)=>{
-            //console.log("monitor respone")
-            //console.log(respone)
-           /* this.setState({
-                status: respone.state
-            })
-
-            if(respone.state == null){
-                this.setState({
-                    status: "waiting",
-                })
-            }*/
+          if(respone == null){
+              this.setState({
+                  status: "pending",
+              })
+          }else{
+              this.setState({
+                  status: respone.state,
+              })
+          }
         })
         .catch(err=>{
             console.log(err.status)
