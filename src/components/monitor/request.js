@@ -5,12 +5,15 @@ import RequestDetail from './requestDetail';
 
 class Request extends React.Component{
 
-    constructor(){
+    constructor(props){
         super()
+
+        console.log(props)
 
         this.state={
             student:[],
             currentStudent: null,
+            //monitorID: props.match.params.id,
         }
     }
 
@@ -36,7 +39,7 @@ class Request extends React.Component{
 
         let studentID = event.target.parentNode.id;
         let monitorID = this.props.match.params.id;
-
+        
         //http://35.185.179.159:8080/api/monitor/trainingPointForm/12121/state/accepted?monitorID=0003
         let url = "http://35.185.179.159:8080/api/monitor/trainingPointForm/"
                  + studentID + "/state/accepted?monitorID=" + monitorID;
@@ -76,6 +79,8 @@ class Request extends React.Component{
     handleDetail(event){
         let url = "http://35.185.179.159:8080/api/trainingPointForm/" + event.target.parentNode.id;
 
+        console.log(event.target.parentNode)
+        let studentID = event.target.parentNode.id;
         fetch(url)
         .then(respone=>{
             if(!respone.ok){
@@ -85,8 +90,10 @@ class Request extends React.Component{
             return respone.json();
         })
         .then(respone=>{
+            let student = respone.data;
+            student.studentID = studentID;
             this.setState({
-                currentStudent: respone.data
+                currentStudent: student,
             })
         })
         .catch(err=>{
@@ -109,8 +116,8 @@ class Request extends React.Component{
                                 </div>
                     })}
                 </div>
-                <div className="col-md-3">
-                    <RequestDetail student={this.state.currentStudent} handleAccepted={this.handleAccepted} handleRejected={this.handleRejected}/>
+                <div className="col-md-3" style={{"marginBottom":"50px","top": "10px", "backgroundColor":"#fff"}}>
+                    <RequestDetail student={this.state.currentStudent} handleAccepted={()=>this.handleAccepted} handleRejected={this.handleRejected}/>
                 </div>
             </div>    
            

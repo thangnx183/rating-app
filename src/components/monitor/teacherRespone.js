@@ -8,13 +8,19 @@ export default class TeacherRespone extends React.Component{
         fetch(url)
         .then(respone=>{
             //console.log(respone.json())
+            if(!respone.ok){
+                throw respone;
+            }
             return respone.json();
         })
         .then(respone=>{
             console.log(respone)
         })
+        .catch(err=>{
+            console.log(err)
+        })
     }
-    
+
     render(){
         return(
             <div>

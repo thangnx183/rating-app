@@ -29,12 +29,6 @@ class App extends React.Component {
     }
 
     updateSate(id,name,role){
-       /* this.setState({
-            userId:id,
-            role: role
-        })*/
-        console.log(id+" : " +role)
-
         this.setState({
             userId: id,
             userName: name,
@@ -46,7 +40,8 @@ class App extends React.Component {
         this.setState({
             userId: null,
             userName: null,
-            role: null
+            role: null,
+           // sent: false,
         })
     }
 
@@ -119,8 +114,8 @@ class App extends React.Component {
                     <Route exact path={'/'} component={()=><Log update={(id,name, role)=>this.updateSate(id,name, role)}/>}/>
                     <Route path={'/login'} component={()=><Log update={(id,name, role)=>this.updateSate(id,name, role)}/>}  />
                     <Route path={'/signup'} component={Signup} />
-                    <Route path ={'/student/:name/:id/rate'} component={Rating} />
-                    <Route path ={'/student/:name/:id/respone'} component={Respone} />
+                    <Route path ={'/student/:name/:id/rate'} component={(props)=><Rating {...props} />} />
+                    <Route path ={'/student/:name/:id/respone'} component={(props)=><Respone {...props} />} />
                     <Route path = {'/monitor/:name/:id/request'} component={Request}  />
                     <Route path = {'/monitor/:name/:id/respone'} component={TeacherRespone} />
                 </div>

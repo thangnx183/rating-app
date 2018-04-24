@@ -5,7 +5,7 @@ export default class Respone extends React.Component{
     constructor(){
         super();
         this.state={
-            status: "u not send request yet"
+            status: null,
         }
     }
     
@@ -14,19 +14,45 @@ export default class Respone extends React.Component{
         //
         //http://35.185.179.159:8080/api/adviser/feedback/111
 
-        let url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
+        let url = "http://35.185.179.159:8080/api/trainingPointForm/"+this.props.match.params.id;
+
         fetch(url)
         .then(respone=>{
             if(!respone.ok){
-                console.log(respone)
+                throw respone;
+            }
+
+            return respone.json();
+        })
+        .then(respone=>{
+            console.log(respone)
+            if(respone != null){
+                this.setState({
+                    status: "waiting"
+                })
+            }else{
+                this.setState({
+                    status: "u not sent request yet"
+                })
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+        url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
+        fetch(url)
+        .then(respone=>{
+            if(!respone.ok){
+                //console.log(respone)
                 throw respone;
             }
 
             return respone.json();
         })
         .then((respone)=>{
-            console.log("monitor respone")
-            console.log(respone)
+            //console.log("monitor respone")
+            //console.log(respone)
            /* this.setState({
                 status: respone.state
             })

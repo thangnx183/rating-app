@@ -55,9 +55,13 @@ export default class Rating extends React.Component{
         .then(respone=>{
 
             if(respone.status == 200){
+                console.log("rating done")
+                console.log(this.props)
                 this.setState({
                     rateStatus: "sent"
                 }) 
+              
+                this.props.history.push('/student/'+this.props.match.params.name+'/'+this.props.match.params.id+'/respone')
             }
         })
 
@@ -68,9 +72,9 @@ export default class Rating extends React.Component{
         return(
             <div>
                 <form onChange={(event)=>this.onChangeForm(event)}>
-                    y thuc hoc tap                  <input id='1' type='number'/> <br/>
-                    chap hanh noi qui nha truong    <input id='2' type='number'/> <br/>
-                    tham gia cac hoat dong van nghe <input id='3' type='number'/> <br/>
+                    category 1      <input id='1' type='number'/> <br/>
+                    category 2      <input id='2' type='number'/> <br/>
+                    category 3      <input id='3' type='number'/> <br/>
                     <button onClick={(event)=>this.onClickButton(event)}>submit </button>
                 </form>
 
