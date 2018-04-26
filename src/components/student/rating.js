@@ -55,8 +55,8 @@ export default class Rating extends React.Component{
         .then(respone=>{
 
             if(respone.status == 200){
-                console.log("rating done")
-                console.log(this.props)
+                //console.log("rating done")
+                //console.log(this.props)
                 this.setState({
                     rateStatus: "sent"
                 }) 
@@ -71,14 +71,14 @@ export default class Rating extends React.Component{
 
         return(
             <div>
-                <form onChange={(event)=>this.onChangeForm(event)}>
-                    category 1      <input id='1' type='number'/> <br/>
-                    category 2      <input id='2' type='number'/> <br/>
-                    category 3      <input id='3' type='number'/> <br/>
-                    <button onClick={(event)=>this.onClickButton(event)}>submit </button>
+                <form className="row" onChange={(event)=>this.onChangeForm(event)}>
+                    <p className="col-sm-4">Điểm học lực</p>                                <p className="col-sm-7"><input  id='1' type='number' min="0" max="10"/></p> <br/>
+                    <p className="col-sm-4">Ý thức chấp hành nội quy </p>                   <p className="col-sm-7"><input id='2'  type='number' min="0" max="10"/></p> <br/>
+                    <p className="col-sm-4">Ý thức tham gia các hoạt động văn nghệ</p>      <p className="col-sm-7"><input  id='3' type='number' min="0" max="10"/></p> <br/>
+                    <button className="btn btn-primary col-sm-2" onClick={(event)=>this.onClickButton(event)}>submit </button>
                 </form>
 
-                <p>{this.state.rateStatus} </p>
+                <p className="col-sm-3">{this.state.rateStatus} </p>
             </div>
         )
     }

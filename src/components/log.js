@@ -13,11 +13,8 @@ class Log extends React.Component{
     }
 
     click(event){
-        //console.log(event);
-
         event.preventDefault();
-        //this.props.history.push('/student/'+this.state.user_id)
-        //http://35.185.179.159:8080/api/auth/login?username=15021128&password=fdfddf
+
         let url = "http://35.185.179.159:8080/api/auth/login?username=" 
                 + this.state.userName + "&password="+this.state.password;
 
@@ -38,7 +35,6 @@ class Log extends React.Component{
             this.props.history.push('/student/'+this.state.userName+'/'+respone.userID+'/rate');
         })
         .catch(err=>{
-            //console.log(err)
             if(err.status == 403){
                 this.setState({
                     error:"wrong password"
