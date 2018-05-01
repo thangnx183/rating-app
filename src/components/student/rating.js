@@ -53,14 +53,10 @@ export default class Rating extends React.Component{
             })
         })
         .then(respone=>{
-
             if(respone.status == 200){
-                //console.log("rating done")
-                //console.log(this.props)
                 this.setState({
                     rateStatus: "sent"
                 }) 
-              
                 this.props.history.push('/student/'+this.props.match.params.name+'/'+this.props.match.params.id+'/respone')
             }
         })

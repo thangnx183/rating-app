@@ -11,14 +11,26 @@ class RequestDetail extends React.Component{
         }else{
             return(
                 <div className="row">
-                    <p ClassName="col-sm-6">Điểm học lực                           </p> <p ClassName="col-sm-6">{this.props.student.category1} </p> <br/>
-                    <p ClassName="col-sm-6"> Ý thức chấp hành nội quy              </p> <p ClassName="col-sm-6">{this.props.student.category2} </p> <br/>
-                    <p ClassName="col-sm-6">Ý thức tham gia các hoạt động văn nghệ </p> <p ClassName="col-sm-6">{this.props.student.category3} </p> <br/>
+                    Điểm học lực                           : {this.props.student.category1}  <br/>
+                     Ý thức chấp hành nội quy              : {this.props.student.category2}  <br/>
+                    Ý thức tham gia các hoạt động văn nghệ : {this.props.student.category3}  <br/>
 
                 </div>
             )
         }
     }
 }
+
+/**
+ * 
+ *                 <div className="row">
+                    <p ClassName="col-sm-6">Điểm học lực                           </p> <p ClassName="col-sm-6">{this.props.student.category1} </p> <br/>
+                    <p ClassName="col-sm-6"> Ý thức chấp hành nội quy              </p> <p ClassName="col-sm-6">{this.props.student.category2} </p> <br/>
+                    <p ClassName="col-sm-6">Ý thức tham gia các hoạt động văn nghệ </p> <p ClassName="col-sm-6">{this.props.student.category3} </p> <br/>
+
+                </div>
+ * 
+ */
+ 
 
 export default RequestDetail;

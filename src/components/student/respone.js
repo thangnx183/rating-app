@@ -45,8 +45,7 @@ export default class Respone extends React.Component{
        this.getStatus();
    }
 
-    getStatus(){
-       console.log("geting status ......")
+          //console.log("geting status ......")
         /*
         new api http://35.185.179.159:8080/api/monitor/feedback?studentID=12131
         
@@ -55,7 +54,11 @@ export default class Respone extends React.Component{
         
         */
         //url = "http://35.185.179.159:8080/api/adviser/feedback/"+this.props.match.params.id;
-        let url = "http://35.185.179.159:8080/api/monitor/feedback?studentID="+ this.props.match.params.id;
+
+    getStatus(){
+
+        let url = "http://35.185.179.159:8080/api/monitor/feedback?studentID="
+                    + this.props.match.params.id;
         fetch(url)
         .then(respone=>{
             if(!respone.ok) throw respone;

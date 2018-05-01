@@ -25,13 +25,13 @@ export default class TeacherRespone extends React.Component{
             return respone.json();
         })
         .then(respone=>{
-            console.log(respone)
+            //console.log(respone)
 
             this.setState({
                 students: respone,
             })
-            console.log("this is list of adviser feedback")
-            console.log(this.state)
+            //console.log("this is list of adviser feedback")
+            //console.log(this.state)
         })
         .catch(err=>{
             console.log(err)
@@ -67,7 +67,6 @@ export default class TeacherRespone extends React.Component{
                 {this.state.students.map(student=>{
                     return  <div id={student.studentID}>
                                 <span>{student.studentName}</span> <br/>
-                                <span>{student.studentID}</span> <br/>
                                 <button className="btn btn-primary" onClick={(event)=>this.handleClick(event)}>Send back</button>
                             </div>
                 })}

@@ -40,7 +40,6 @@ class Request extends React.Component{
         let studentID = event.target.parentNode.id;
         let monitorID = this.props.match.params.id;
         
-        //http://35.185.179.159:8080/api/monitor/trainingPointForm/12121/state/accepted?monitorID=0003
         let url = "http://35.185.179.159:8080/api/monitor/trainingPointForm/"
                  + studentID + "/state/accepted?monitorID=" + monitorID;
 
@@ -61,7 +60,6 @@ class Request extends React.Component{
         let studentID = event.target.parentNode.id;
         let monitorID = this.props.match.params.id;
 
-        //http://35.185.179.159:8080/api/monitor/trainingPointForm/12121/state/accepted?monitorID=0003
         let url = "http://35.185.179.159:8080/api/monitor/trainingPointForm/"
                  + studentID + "/state/rejected?monitorID="+monitorID;
 
