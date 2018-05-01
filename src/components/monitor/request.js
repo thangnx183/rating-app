@@ -100,14 +100,15 @@ class Request extends React.Component{
     }
 
     render(){
-        //console.log(this.state)
+        console.log(this.state.student)
         return(
             <div className="row">
                 <div className="col-md-3">
                     {this.state.student.map(student=>{
                         //console.log("yooo");
                         return <div id={student.studentID} >
-                                    <div>{student.studentName}</div> 
+                                    <div>Name : {student.studentName}</div> 
+                                    <div>Username :{student.studentUsername} </div>
                                     <button className="btn btn-primary" onClick={(event)=>this.handleAccepted(event)}>Accepted</button> 
                                     <button className="btn btn-primary" onClick={(event)=>this.handleRejected(event)}> Rejected</button>
                                     <button className="btn btn-primary" onClick={(event)=>this.handleDetail(event)}>Detail </button>

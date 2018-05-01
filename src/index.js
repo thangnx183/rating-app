@@ -46,6 +46,8 @@ class App extends React.Component {
     }
 
     render() {
+        console.log("log :")
+        console.log(this.state)
 
       return (
         <div> 
@@ -104,6 +106,10 @@ class App extends React.Component {
                                     <Link className="nav-link" to={'/signup'}>Sign up </Link>
                                     : null
                                     }
+                                </li>
+
+                                <li  className="nav-item " color="red">
+                                    <Link className="nav-link" to="/">say something</Link>
                                 </li>
 
                             </ul>
