@@ -109,7 +109,10 @@ class App extends React.Component {
                                 </li>
 
                                 <li  className="nav-item " color="red">
-                                    <Link className="nav-link" to="/">say something</Link>
+                                    {! (this.state.userId === null) ?
+                                    <Link className="nav-link" to={'/student/'+this.state.userName+'/'+this.state.userId+'/rate'}>{this.state.userName}</Link>
+                                    : null
+                                    }                                
                                 </li>
 
                             </ul>
